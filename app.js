@@ -225,7 +225,9 @@ async function startCamera() {
       audio: false,
     });
     video.srcObject = stream;
-    await new Promise((res) => (video.onloadedmetadata = res));
+    if (video.readyState < 1) {
+      await new Promise((res) => (video.onloadedmetadata = res));
+    }
     await video.play();
     resize(video.videoWidth, video.videoHeight);
     if (landmarker.runningMode !== "VIDEO") await landmarker.setOptions({ runningMode: "VIDEO" });
