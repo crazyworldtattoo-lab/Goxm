@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <title>Sanal Gözlük Deneme</title>
   <style>
-    body { margin: 0; font-family: sans-serif; background: #111; color: #eee; }
     .hidden { display: none !important; }
     #status {
       position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
