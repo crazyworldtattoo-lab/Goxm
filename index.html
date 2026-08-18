@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanal Gözlük Deneme</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: #111;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  header {
+    width: 100%;
+    padding: 14px 20px;
+    text-align: center;
+    background: #1a1a1a;
+    border-bottom: 1px solid #2c2c2c;
+  }
+  header h1 { font-size: 1.3rem; font-weight: 600; }
+  header p { font-size: 0.85rem; color: #aaa; margin-top: 2px; }
+  #stage-wrap {
+    position: relative;
+    width: min(96vw, 860px);
+    margin-top: 14px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+    aspect-ratio: 4 / 3;
+  }
+  #mirror {
+    position: absolute;
+    inset: 0;
+    transform: scaleX(-1);
+  }
+  #video, #photo-canvas, #three-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  #three-canvas { z-index: 2; }
+  #status {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    background: rgba(0,0,0,0.65);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  #status.hidden { display: none; }
+  #controls {
+    width: min(96vw, 860px);
+    margin: 14px 0 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .model-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    background: #1e1e1e;
+    border: 2px solid #333;
+    border-radius: 10px;
+    padding: 10px 14px;
+    color: #ddd;
+    cursor: pointer;
+    font-size: 0.8rem;
+    min-width: 92px;
+    transition: border-color .15s, background .15s;
+  }
+  .model-btn:hover { background: #262626; }
+  .model-btn.active { border-color: #4da3ff; background: #24313f; color: #fff; }
+  .swatch {
+    width: 42px; height: 16px; border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+  .action-btn {
+    background: #2563eb;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    padding: 12px 22px;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+  .action-btn.secondary { background: #333; }
+  .action-btn:hover { filter: brightness(1.1); }
+  #file-input { display: none; }
+  footer { color: #666; font-size: 0.75rem; margin-bottom: 16px; text-align: center; padding: 0 12px; }
+</style>
+</head>
+<body>
+  <header>
+    <h1>👓 Sanal Gözlük Deneme</h1>
+    <p>Kamerayı açın, gözlüğün yüzünüzde nasıl durduğunu anında görün</p>
+  </header>
+
+  <div id="stage-wrap">
+    <div id="mirror">
+      <video id="video" autoplay muted playsinline></video>
+      <canvas id="photo-canvas"></canvas>
+      <canvas id="three-canvas"></canvas>
+    </div>
+    <div id="status">Yükleniyor…</div>
+  </div>
+
+  <div id="controls">
+    <div class="row" id="model-row"></div>
+    <div class="row">
+      <button class="action-btn" id="snap-btn">📷 Fotoğraf Çek</button>
+      <button class="action-btn secondary" id="upload-btn">🖼️ Fotoğrafla Dene</button>
+      <button class="action-btn secondary" id="camera-btn" style="display:none">🎥 Kameraya Dön</button>
+      <input type="file" id="file-input" accept="image/*">
+    </div>
+  </div>
+
+  <footer>Görüntünüz cihazınızda işlenir, hiçbir sunucuya gönderilmez.</footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
