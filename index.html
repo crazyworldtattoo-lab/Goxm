@@ -85,6 +85,20 @@
   }
   .model-btn:hover { background: #262626; }
   .model-btn.active { border-color: #4da3ff; background: #24313f; color: #fff; }
+  .product-thumb {
+    width: 96px;
+    height: 48px;
+    object-fit: contain;
+    background: #fff;
+    border-radius: 8px;
+  }
+  #buy-link {
+    color: #4da3ff;
+    font-size: 0.9rem;
+    text-align: center;
+    text-decoration: none;
+  }
+  #buy-link:hover { text-decoration: underline; }
   .swatch {
     width: 42px; height: 16px; border-radius: 8px;
     border: 1px solid rgba(255,255,255,0.25);
@@ -121,6 +135,7 @@
 
   <div id="controls">
     <div class="row" id="model-row"></div>
+    <a id="buy-link" href="#" target="_blank" rel="noopener">Ürünü mağazada gör →</a>
     <div class="row">
       <button class="action-btn" id="snap-btn">📷 Fotoğraf Çek</button>
       <button class="action-btn secondary" id="upload-btn">🖼️ Fotoğrafla Dene</button>
